@@ -6,7 +6,21 @@ const path = require("path")
 const port = 3000
 const fallBackJson = require("./jsonData/scraped_data.json")
 
-app.get("/scrape-data", (req, res) => {
+require("dotenv").config()
+
+const API_KEY = process.env.API_KEY
+
+const checkApiKey = (req, res, next) => {
+  const apiKey = req.headers["x-api-key"]
+
+  if (apiKey && apiKey === API_KEY) {
+    next()
+  } else {
+    return res.status(403).json({ error: "Forbidden: Invalid API Key" })
+  }
+}
+
+app.get("/scrape-data", checkApiKey, (req, res) => {
   try {
     console.log("process initiated")
 
@@ -30,11 +44,11 @@ app.get("/scrape-data", (req, res) => {
     })
   } catch (error) {
     console.log(error)
-    res.errored(error)
+    res.status(500).json({ error: "An unexpected error occurred" })
   }
 })
 
-app.get("/fetch-data", (req, res) => {
+app.get("/fetch-data", checkApiKey, (req, res) => {
   console.log("Fetching data...")
 
   try {
