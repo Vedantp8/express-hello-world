@@ -14,7 +14,7 @@ app.use(
   })
 )
 
-app.get("/scrape-data", checkApiKey, (req, res) => {
+app.get("/scrape-data", (req, res) => {
   try {
     console.log("process initiated")
 
@@ -42,7 +42,7 @@ app.get("/scrape-data", checkApiKey, (req, res) => {
   }
 })
 
-app.get("/fetch-data", checkApiKey, (req, res) => {
+app.get("/fetch-data", (req, res) => {
   console.log("Fetching data...")
 
   try {
