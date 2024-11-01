@@ -11,10 +11,10 @@ require("dotenv").config()
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://drinks-data-seven.vercel.app"],
+    origin: "https://drinks-data-seven.vercel.app", // Adjust as necessary
+    methods: ["GET"], // Allow specific methods
   })
 )
-
 const API_KEY = process.env.API_KEY
 
 const checkApiKey = (req, res, next) => {
