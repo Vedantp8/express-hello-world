@@ -6,7 +6,7 @@
   "author": "Vedant <pvedant110@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "install-python-deps": "pip install -r requirements.txt",
-    "start": "yarn install-python-deps && node app.js"
+    "install-python-deps": "python -m venv venv && source venv/bin/activate && pip install -r requirements.txt",
+    "start": "source venv/bin/activate && node server.js"
   }
 }
