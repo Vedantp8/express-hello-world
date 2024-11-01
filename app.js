@@ -42,7 +42,7 @@ app.get("/scrape-data", (req, res) => {
   }
 })
 
-app.get("/fetch-data", (req, res) => {
+app.get("/drinks-json", (req, res) => {
   console.log("Fetching data...")
 
   try {
