@@ -2,9 +2,16 @@ const express = require("express")
 const { exec } = require("child_process")
 const fs = require("fs")
 const path = require("path")
+const cors = require("cors")
 const app = express()
 const PORT = 3000
 const fallBackJson = require("./jsonData/scraped_data.json")
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+)
 
 // Define the route
 app.get("/scrape-data", (req, res) => {
@@ -14,17 +21,15 @@ app.get("/scrape-data", (req, res) => {
     exec("python script.py", (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing Python script: ${error.message}`)
-        // return res.status(500).json({ error: "Failed to execute script" })
+        return res.status(500).json({ error: "Failed to execute script" })
       }
 
-      // Path to the generated JSON file
       const filePath = path.join(__dirname, "./jsonData/scraped_data.json")
 
-      // Check if file exists
       fs.readFile(filePath, "utf8", (err, data) => {
         if (err) {
           console.error(`Error reading JSON file: ${err.message}`)
-          // return res.status(500).json({ error: "Failed to read JSON data" })
+          return res.status(500).json({ error: "Failed to read JSON data" })
         }
 
         // Send JSON data to the frontend
