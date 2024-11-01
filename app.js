@@ -2,6 +2,9 @@ const express = require("express")
 const app = express()
 const port = process.env.PORT || 3001
 const jsonData = require("./jsonData/scraped_data.json")
+const { exec } = require("child_process")
+const fs = require("fs")
+const path = require("path")
 
 app.get("/", (req, res) => res.type("html").send(html))
 
@@ -36,7 +39,7 @@ app.get("/scrape-data", (req, res) => {
     })
   } catch (error) {
     console.log(error)
-    res.errored(error)
+    res.send(error)
   }
 })
 
