@@ -5,8 +5,15 @@ const fs = require("fs")
 const path = require("path")
 const port = 3000
 const fallBackJson = require("./jsonData/scraped_data.json")
+const cors = require("cors")
 
 require("dotenv").config()
+
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://drinks-data-seven.vercel.app/"],
+  })
+)
 
 const API_KEY = process.env.API_KEY
 
