@@ -2,16 +2,9 @@ const express = require("express")
 const { exec } = require("child_process")
 const fs = require("fs")
 const path = require("path")
-const cors = require("cors")
 const app = express()
 const PORT = 3000
 const fallBackJson = require("./jsonData/scraped_data.json")
-
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-  })
-)
 
 // Define the route
 app.get("/scrape-data", (req, res) => {
