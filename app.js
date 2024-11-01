@@ -7,25 +7,12 @@ const port = 3000
 const fallBackJson = require("./jsonData/scraped_data.json")
 const cors = require("cors")
 
-require("dotenv").config()
-
 app.use(
   cors({
-    origin: "https://drinks-data-seven.vercel.app", // Adjust as necessary
-    methods: ["GET"], // Allow specific methods
+    origin: "https://drinks-data-seven.vercel.app",
+    methods: ["GET"],
   })
 )
-const API_KEY = process.env.API_KEY
-
-const checkApiKey = (req, res, next) => {
-  const apiKey = req.headers["x-api-key"]
-
-  if (apiKey && apiKey === API_KEY) {
-    next()
-  } else {
-    return res.status(403).json({ error: "Forbidden: Invalid API Key" })
-  }
-}
 
 app.get("/scrape-data", checkApiKey, (req, res) => {
   try {
