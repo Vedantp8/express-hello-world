@@ -1,0 +1,12 @@
+{
+  "name": "drinks-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Vedantp8/express-hello-world.git",
+  "author": "Vedant <pvedant110@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "install-python-deps": "pip install -r requirements.txt",
+    "start": "yarn install-python-deps && node app.js"
+  }
+}
